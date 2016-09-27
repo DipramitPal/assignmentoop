@@ -14,15 +14,56 @@
     .carousel {margin-top: -50px;}
     .headd{text-align: center;}
     </style>
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=assign", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    }
+catch(PDOException $e)
+    {
+    echo "Connection failed: " . $e->getMessage();
+    }
+
+
+
+    $sql = "SELECT * from login where name='Ankit Saini'";
+$result = $conn->query($sql);
+
+while ($row = $result->fetch(PDO::FETCH_ASSOC))
+{
+$name=$row['name'];
+}
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </head>
 <body>
 <div class="navbar-fixed">
   <nav>
   
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Logo</a>
+      <a href="#" class="brand-logo"><?php echo $name; ?></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#one">Given Tasks</a></li>
+        <li><a href="#one">Tasks Given</a></li>
         <li><a href="#two">All Tasks</a></li>
         <li><a href="#three">Alert</a></li>
         <li><a href="#four">Give Task</a></li>
@@ -32,57 +73,36 @@
   </nav></div>
         <div class="container" id="one"><br><br><br>
         <h1 class="headd">Given Tasks</h1>
-  <div class="carousel">
- <div class="carousel-item">
-    <div class="row">
-      <div class="col s12 m12">
-        <div class="card-panel teal">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span>
+  <div class="carousel"><?php  $sql2 = "SELECT * from data where given_by='Ankit Saini'";
+$result2 = $conn->query($sql2);
+
+while ($row2 = $result2->fetch(PDO::FETCH_ASSOC))
+{
+echo "<div class='carousel-item'>
+    <div class='row'>
+      <div class='col s12 m12'>
+        <div class='card-panel teal'> 
+          <span class='white-text'> "
+.$row2["given_to"]."<br>".$row2["textdata"]."<br>";
+if($row2["completed"]==0){echo "Not Completed";}
+else{echo "completed";}
+
+
+      echo     "</span>
         </div>
       </div>
-    </div> </div>
-  <div class="carousel-item">
-    <div class="row">
-      <div class="col s12 m12">
-        <div class="card-panel teal">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span>
-        </div>
-      </div>
-    </div> </div>
-   <div class="carousel-item">
-    <div class="row">
-      <div class="col s12 m12 ">
-        <div class="card-panel teal">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span>
-        </div>
-      </div>
-    </div></div>
-    <div class="carousel-item">
-    <div class="row">
-      <div class="col s12 m12">
-        <div class="card-panel teal">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span>
-        </div>
-      </div>
-    </div> </div>
-     <div class="carousel-item">
-    <div class="row">
-      <div class="col s12 m12">
-        <div class="card-panel teal">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span>
-        </div>
-      </div>
-    </div> </div>
+    </div> </div>";
+}
+
+
+
+
+
+
+?>
+ 
+ 
+       
   </div>
   <div class="row"><br><br><br></div>
   </div><div class="container">
@@ -90,57 +110,33 @@
   <div class="container" id="two">
     <h1 class="headd">All Tasks</h1>
   <div class="carousel">
- <div class="carousel-item">
-    <div class="row">
-      <div class="col s12 m12">
-        <div class="card-panel teal">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span>
+ <?php  $sql3 = "SELECT * from data ";
+$result3 = $conn->query($sql3);
+
+while ($row3 = $result3->fetch(PDO::FETCH_ASSOC))
+{
+echo "<div class='carousel-item'>
+    <div class='row'>
+      <div class='col s12 m12'>
+        <div class='card-panel teal'> 
+          <span class='white-text'> "
+.$row3["given_to"]."<br>".$row3["textdata"]."<br>";
+if($row3["completed"]==0){echo "Not Completed";}
+else{echo "completed";}
+
+
+      echo     "</span>
         </div>
       </div>
-    </div> </div>
-  <div class="carousel-item">
-    <div class="row">
-      <div class="col s12 m12">
-        <div class="card-panel teal">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span>
-        </div>
-      </div>
-    </div> </div>
-   <div class="carousel-item">
-    <div class="row">
-      <div class="col s12 m12 ">
-        <div class="card-panel teal">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span>
-        </div>
-      </div>
-    </div></div>
-    <div class="carousel-item">
-    <div class="row">
-      <div class="col s12 m12">
-        <div class="card-panel teal">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span>
-        </div>
-      </div>
-    </div> </div>
-     <div class="carousel-item">
-    <div class="row">
-      <div class="col s12 m12">
-        <div class="card-panel teal">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span>
-        </div>
-      </div>
-    </div> </div>
-  </div>
+    </div> </div>";
+}
+
+
+
+
+
+
+?>
   </div>
   <div class="row"><br><br><br></div>
   </div><div class="container">
@@ -148,57 +144,34 @@
    <div class="container" id="three">
     <h1 class="headd">Alert</h1>
   <div class="carousel">
- <div class="carousel-item">
-    <div class="row">
-      <div class="col s12 m12">
-        <div class="card-panel teal">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span>
+ <?php  $sql2 = "SELECT * from data where given_by='Ankit Saini'";
+$result2 = $conn->query($sql2);
+
+
+while ($row2 = $result2->fetch(PDO::FETCH_ASSOC))
+{
+echo "<div class='carousel-item'>
+    <div class='row'>
+      <div class='col s12 m12'>
+        <div class='card-panel teal'> 
+          <span class='white-text'> "
+.$row2["given_to"]."<br>".$row2["textdata"]."<br>";
+if($row2["completed"]==0){echo "Not Completed";}
+else{echo "completed";}
+
+
+      echo     "</span>
         </div>
       </div>
-    </div> </div>
-  <div class="carousel-item">
-    <div class="row">
-      <div class="col s12 m12">
-        <div class="card-panel teal">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span>
-        </div>
-      </div>
-    </div> </div>
-   <div class="carousel-item">
-    <div class="row">
-      <div class="col s12 m12 ">
-        <div class="card-panel teal">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span>
-        </div>
-      </div>
-    </div></div>
-    <div class="carousel-item">
-    <div class="row">
-      <div class="col s12 m12">
-        <div class="card-panel teal">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span>
-        </div>
-      </div>
-    </div> </div>
-     <div class="carousel-item">
-    <div class="row">
-      <div class="col s12 m12">
-        <div class="card-panel teal">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span>
-        </div>
-      </div>
-    </div> </div>
-  </div>
+    </div> </div>";
+}
+
+
+
+
+
+
+?>
   </div>
   <div class="row"><br><br><br></div>
   </div><div class="container">
@@ -214,12 +187,32 @@
         </div>
       </div>
       
-        <div class="input-field col s12">
-    <select multiple>
-      <option value="" disabled selected>Choose your option</option>
-      <option value="1">Option 1</option>
-      <option value="2" disabled>Option 2</option>
-      <option value="3">Option 3</option>
+        <div class="input-field col s12"><select multiple>
+      <option value="" disabled selected>Choose your option</option> 
+
+      <?php  $sql4 = "SELECT * from peopledata ";
+$result4 = $conn->query($sql4);
+
+while ($row4 = $result4->fetch(PDO::FETCH_ASSOC))
+{
+echo "<option value=".$row4["id"]." ";
+if($row4["busyornot"]==0){echo "disabled>";}
+else{echo ">";}
+echo 
+$row4["name"].
+
+        "</option>";
+}
+
+
+
+
+
+
+?>
+    
+     
+      
     </select>
     <label>Materialize Multiple Select</label>
   </div>
