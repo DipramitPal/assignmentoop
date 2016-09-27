@@ -63,6 +63,7 @@ class USER
         return true;
    }
 }
+<<<<<<< HEAD
 
 
 
@@ -110,4 +111,6 @@ class subHeads {
 
 
 }
+=======
+>>>>>>> 63d03b85aa7f1e7b953f55f5d983793e21b8275f
 ?>
