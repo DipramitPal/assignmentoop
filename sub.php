@@ -15,8 +15,9 @@
     .headd{text-align: center;}</style>
 </head>
 <body>
-
+<div class="navbar-fixed">
   <nav>
+  
     <div class="nav-wrapper">
       <a href="#" class="brand-logo">Logo</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -25,8 +26,8 @@
         <li><a href="collapsible.html">My Info</a></li>
       </ul>
     </div>
-  </nav>
-        <div class="container" id="one">
+  </nav></div>
+        <div class="container" id="one"><br><br><br>
         <h1 class="headd">My Tasks</h1>
   <div class="carousel">
  <div class="carousel-item">
