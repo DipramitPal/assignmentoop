@@ -1,3 +1,14 @@
+<?php
+
+require_once 'connect.php';
+
+if (!isset($_SESSION['user_name']))
+  header('Location: index.php');
+if($_SESSION['user_rank']!=2) {
+  $user->redirect();
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +35,7 @@
         <li><a href="#one">My Tasks</a></li>
         <li><a href="#two">All Tasks</a></li>
         <li><a href="collapsible.html">My Info</a></li>
+        <li><a href="logout.php">Logout</a></li>
       </ul>
     </div>
   </nav></div>
