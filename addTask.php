@@ -9,6 +9,7 @@ if($_SESSION['user_rank']!=1) {
   $user->redirect();
 }
 $query = $user->getSubs();
+
 	
 ?>
 
@@ -24,7 +25,10 @@ $query = $user->getSubs();
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
 	
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>-->
+	<script type="text/javascript" src="js/script.js"></script>
 </head>
 <body>
 
@@ -32,25 +36,20 @@ $query = $user->getSubs();
 					<div class="container white z-depth-5">
 						<div class="row">
 							<h2 class="center">Add a New Task</h2>
-							<form class="col s10 offset-s1" method="POST" action="">
+							<!-- <div class="col s10 offset-s1"> -->
+							<form class="col s10 offset-s1 taskForm" method="POST" action="taskSubmit.php">
 								<div class="row">
 									<div class="input-field col s12">
-										<textarea id="textarea1" class="materialize-textarea"></textarea>
+										<textarea id="textarea1" class="materialize-textarea" name="task" id="task" required></textarea>
 										<label for="textarea1">Task</label>
 									</div>
 								</div>
-								<div class="row">
-										<div class="center">
-											<button class="btn waves-effect waves-light btn-logIn"  name="btn-logIn">Submit
-															<i class="material-icons right">send</i>
-  											</button>
-										</div>
-								</div>
+								
 								
 
 									<div class="input-field col s12">
-										<select multiple>
-											<option value="" disabled selected>Select Sub-Heads</option>
+										<select multiple name="subHeads[]" required id="subHeads">
+											<option value="" disabled>Select Sub-Heads</option>
 											<?php 
 
 											 while($userRow=$query->fetch(PDO::FETCH_ASSOC))
@@ -70,12 +69,21 @@ $query = $user->getSubs();
 											?>
 											
 										</select>
-										<label>Materialize Multiple Select</label>
+										<label>Sub Heads Select</label>
 									</div>
 
 
+								<div class="row">
+										<div class="center">
+											<button class="btn waves-effect waves-light btn-taskSbmt"  name="btn-taskSbmt">Submit
+															<i class="material-icons right">send</i>
+  											</button>
+										</div>
+								</div>
+
+
 								
-								
+							<!-- </div> -->	
 							</form>
 						</div>
 					</div>
@@ -83,8 +91,6 @@ $query = $user->getSubs();
 
 
 
-	<!-- <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
-	<script type="text/javascript" src="js/materialize.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script> -->
+
 </body>
 </html>

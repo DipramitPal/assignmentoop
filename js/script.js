@@ -7,6 +7,27 @@ $(document).ready(function() {
     $('#addTask').click(function(){
 
     	$('#page').load('addTask.php'); 	
-    })
+    });
+
+	$( "#taskForm").submit(function( event ) {
+	  if($("#subHeads").val()==NULL)
+		 event.preventDefault();
+
+	  // else
+	  // {
+	  // 	var jsonstring = JSON.stringify($("#subHeads").val());
+	  // 	var task = $("#task").val();
+	  // 	$.ajax({
+   //      type: "POST",
+   //      url: "taskSubmit.php",
+   //      data: {subHeads : jsonString,task: task}, 
+   //      cache: false,
+
+   //      success: function(data){
+   //          alert(data);
+   //      	}
+   //  	});
+	  
+		});
 
   });

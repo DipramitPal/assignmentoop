@@ -85,6 +85,23 @@ class USER
       $query->execute();
       return $query;
     }
+    public function getMaxTaskid()
+    {
+      $query = $this->db->prepare("SELECT max(taskid) FROM data");
+       $query->execute();
+       $id = $query->fetchColumn();
+       return $id;
+    }
+
+    public function addTask($task,$uname,$hname,$id)
+    {
+       
+       
+      
+       $query = $this->db->prepare("INSERT INTO data (taskid,given_by,given_to,textdata,alert,completed) values (:taskid,:hname,:uname,:task,0,0)");
+       
+       $query->execute(array(':taskid'=>$id,':hname'=>$hname,':task'=>$task,':uname'=>$uname));
+    }
 }
 
 
