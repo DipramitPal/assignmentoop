@@ -62,55 +62,69 @@ class USER
         unset($_SESSION['user_category']);
         return true;
    }
+
+   public function getBusyStatus($uname)
+    {
+      $query = $this->db->prepare("SELECT * FROM data WHERE given_to=:uname ORDER BY taskid DESC LIMIT 1");
+      $query->execute(array(':uname'=>$uname));
+      if($query->rowCount())
+      {
+        $userRow=$query->fetch(PDO::FETCH_ASSOC);
+
+        if($userRow['completed']==0)
+          echo "disabled";
+      }
+      
+        
+        
+    }
+
+  public function getSubs()
+    {
+      $query= $this->db->prepare("SELECT name FROM login WHERE category=2");
+      $query->execute();
+      return $query;
+    }
 }
-<<<<<<< HEAD
 
 
 
 
-class subHeads {
+// class subHeads {
 
-  private $name;
-  private $taskbusy; //Save 0 if Free and 1 Task is already Assigned!
+//   private $name;
+//   private $taskbusy; //Save 0 if Free and 1 Task is already Assigned!
+//   private $db;
 
 
-  public function __construct($uname)
-  {
-    $query = $DB_con->prepare("SELECT * FROM data WHERE given_to=:uname LIMIT 1");
-    $query->execute(array(':uname'=>$uname));
-    $userRow=$query->fetch(PDO::FETCH_ASSOC);
-    if(userRow['completed']==1)
-      $this->taskbusy=0;
-    else if(userRow['completed']==0)
-      $this->taskbusy=1;
-    $this->name = $uname;
+//   public function __construct($uname)
+//   {
+    
+    
+//     $this->name = $uname;
   
 
-  }
+//   }
 
-  public function getName()
-    {
-      return $this->name;
+//   public function getName()
+//     {
+//       return $this->name;
 
-    }
+//     }
 
-    public function getBusyStatus()
-    {
-      return $this->taskbusy;
-    }
+    
 
-    public function addTask($task,$id,$hname)
-    {
-      if(($this->taskbusy)==0)
-      {
+//     public function addTask($task,$id,$hname)
+//     {
+//       if(($this->taskbusy)==0)
+//       {
         
-        $query = $DB_con->prepare("INSERT INTO data (taskid,given_by,given_to,textdata,alert,completed) values (:taskid,:hname,($this->name),:task,0,0))";
-        $query->execute(array(':taskid'=>$id,':hname'=>$hname,':task'=>$task));
-      }
-    }
+//         $DB_con = $USER->returnDb();
+//         $query = $DB_con->prepare("INSERT INTO data (taskid,given_by,given_to,textdata,alert,completed) values (:taskid,:hname,($this->name),:task,0,0)");
+//         $query->execute(array(':taskid'=>$id,':hname'=>$hname,':task'=>$task));
+//       }
+//     }
 
 
-}
-=======
->>>>>>> 63d03b85aa7f1e7b953f55f5d983793e21b8275f
+// }
 ?>

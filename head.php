@@ -19,8 +19,11 @@ if($_SESSION['user_rank']!=1) {
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
             
       <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       
   </head>
   <body>
@@ -30,7 +33,7 @@ if($_SESSION['user_rank']!=1) {
         <div class="nav-wrapper">
           <a href="#" class="brand-logo">Logo</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="#one">Add Task</a></li>
+            <li id="addTask"><a href="#">Add Task</a></li>
             <li><a href="#two">All Tasks</a></li>
             <li><a href="#">Alerts</a></li>
             <li><a href="logout.php">Logout</a></li>
@@ -38,5 +41,12 @@ if($_SESSION['user_rank']!=1) {
         </div>
       </nav>
     </div>
+
+    <div id="page">
+      
+
+
+    </div>
+
   </body>
 </html>
