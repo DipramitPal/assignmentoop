@@ -3,8 +3,8 @@
 session_start();
 
 $DB_host = "localhost:3306";
-$DB_user = "user";
-$DB_pass = "password";
+$DB_user = "root";
+$DB_pass = "";
 $DB_name = "assignment";
 
 try

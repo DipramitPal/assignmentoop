@@ -51,12 +51,12 @@ $query = $user->getSubs();
 										<select multiple name="subHeads[]" required id="subHeads">
 											<option value="" disabled>Select Sub-Heads</option>
 											<?php 
-
+											
 											 while($userRow=$query->fetch(PDO::FETCH_ASSOC))
 											 {
 
 											  	echo "<option value='".$userRow['name']."'";
-											  	$user->getBUsyStatus($userRow['name']);
+											  	$user->getBusyStatus($userRow['name']);
 											  	echo ">";
 											  	echo $userRow['name'];
 											  	echo "</option>";
