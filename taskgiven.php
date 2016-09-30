@@ -27,8 +27,7 @@ $user->makePanel($query2);
 
 ?>
  
- <script type="text/javascript">$(document).ready(function(){
+<!--  <script type="text/javascript">$(document).ready(function(){
       $('.carousel').carousel();
-    });</script>
-       
-  </div>
+    });</script> -->
+<script type="text/javascript" src="js/script.js"></script>       

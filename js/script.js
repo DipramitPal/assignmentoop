@@ -4,6 +4,8 @@ $(document).ready(function() {
 
     $('select').material_select();
 
+     $('.carousel').carousel();
+
     $('#addTask').click(function(){
 
     	$('#page').load('addTask.php'); 	

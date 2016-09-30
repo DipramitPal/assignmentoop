@@ -29,6 +29,7 @@ $query = $user->getSubs();
 		<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>-->
 	<script type="text/javascript" src="js/script.js"></script>
+	<!-- <script type="text/javascript"> $('select').material_select();</script> -->
 </head>
 <body>
 
@@ -52,17 +53,7 @@ $query = $user->getSubs();
 											<option value="" disabled>Select Sub-Heads</option>
 											<?php 
 											
-											 while($userRow=$query->fetch(PDO::FETCH_ASSOC))
-											 {
-
-											  	echo "<option value='".$userRow['name']."'";
-											  	$user->getBusyStatus($userRow['name']);
-											  	echo ">";
-											  	echo $userRow['name'];
-											  	echo "</option>";
-
-											 	
-											 }
+											 $user->getAvailablesubs($query);
 
 
 

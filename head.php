@@ -35,7 +35,7 @@ if($_SESSION['user_rank']!=1) {
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li id="alltask"><a href="#">All Tasks</a></li>
             <li id="addTask"><a href="#">Add Task</a></li>
-             <li id="taskgiven"><a href="#taskgiven">Task Given By Me</a></li>
+             <li id="taskgiven"><a href="#">Task Given By Me</a></li>
             <li><a href="#alerts">Alerts</a></li>
             <li><a href="logout.php">Logout</a></li>
           </ul>

@@ -63,7 +63,7 @@ class USER
         return true;
    }
 
-   public function getBusyStatus($uname)
+   private function getBusyStatus($uname)
     {
       $query = $this->db->prepare("SELECT * FROM data WHERE given_to=:uname ORDER BY taskid DESC LIMIT 1");
       $query->execute(array(':uname'=>$uname));
@@ -98,18 +98,19 @@ class USER
       return $query2;
     }
 
-public function optionss($query){
- while($userRow=$query->fetch(PDO::FETCH_ASSOC))
+public function getAvailablesubs($query){
+while($userRow=$query->fetch(PDO::FETCH_ASSOC))
                        {
 
                           echo "<option value='".$userRow['name']."'";
-                          $user->getBusyStatus($userRow['name']);
+                          $this->getBusyStatus($userRow['name']);
                           echo ">";
                           echo $userRow['name'];
                           echo "</option>";
 
-                        }
+                        
                        }
+                     }
 
 public function makePanel($query2){
     while($userRow2=$query2->fetch(PDO::FETCH_ASSOC))
