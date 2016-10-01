@@ -10,13 +10,21 @@ if(isset($_POST['taskUpdt']))
 
 {
  	
+	if($_POST['taskUpdt']==1)
+	{
+	 	$taskid = $_POST['taskid'];
+	 	$task = $_POST['task'];
+	 	$user->updateTask($taskid,$task);
+	 	echo "Updated!";
 
- 	$taskid = $_POST['taskid'];
- 	$task = $_POST['task'];
- 	$user->updateTask($taskid,$task);
- 	echo "Task Updated!";
+	 }
 
-
+	 else if($_POST['taskUpdt']==2)
+	 {
+	 	$taskid = $_POST['taskid'];
+	 	$user->delTask($taskid);
+	 	echo "Deleted!";
+	 }
 
 }
 

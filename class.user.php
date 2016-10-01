@@ -174,7 +174,7 @@ if($userRow3["completed"]==0)
   {
     echo "<td>Not Completed</td>";
     if($_SESSION['user_rank']==1)
-      echo '<td class="editTask" id="'.$userRow3['taskid'].'"><i class="material-icons">mode_edit</i></td>';
+      echo '<td class="editTask" id="'.$userRow3['taskid'].'"><i class="material-icons">mode_edit</i></td><td class="delTask" id="'.$userRow3['taskid'].'"><i class="material-icons">delete</i></td>';
   }
 else{echo "<td>completed</td>";}
   
@@ -227,6 +227,13 @@ else{echo "<td>completed</td>";}
     {
       $query = $this->db->prepare("UPDATE data SET textdata = :task WHERE taskid = :taskid");
       $query->execute(array(":task" => $task, ":taskid" => $taskid));
+
+    }
+
+    public function delTask($taskid)
+    {
+      $query = $this->db->prepare("DELETE FROM data WHERE taskid = :taskid");
+      $query->execute(array(":taskid" => $taskid));
 
     }
 

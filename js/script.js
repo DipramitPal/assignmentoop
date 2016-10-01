@@ -72,6 +72,27 @@ $(document).ready(function() {
 
   });
 
+    $('.delTask').click(function(){
+
+      var id = this.id;
+
+      $.ajax ({
+
+        url:'taskUpdate.php',
+        type: 'POST',
+        data: { taskid : id, taskUpdt : 2 },
+        success: function(data){
+          
+
+          $("#page").load('alltask.php');
+        }
+
+
+      });
+
+
+  });
+
    $(".btn-taskUpdt").click(function(){
 
       var id = $(".modal-taskid").val();
