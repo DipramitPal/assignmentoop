@@ -168,11 +168,16 @@ header("Refresh:0");
 public function makeTable($query3){
     while($userRow3=$query3->fetch(PDO::FETCH_ASSOC))
                        {
-echo "<tr> <td>"
-.$userRow3["given_to"]."</td><td>".$userRow3["given_by"]."</td><td>".$userRow3["textdata"]."</td>";
-if($userRow3["completed"]==0){echo "<td>Not Completed</td>";}
+echo '<tr class="taskrow'.$userRow3['taskid'].'"> <td>'
+.$userRow3["given_to"].'</td><td>'.$userRow3["given_by"].'</td><td class="task'.$userRow3['taskid'].'">'.$userRow3["textdata"]."</td>";
+if($userRow3["completed"]==0)
+  {
+    echo "<td>Not Completed</td>";
+    if($_SESSION['user_rank']==1)
+      echo '<td class="editTask" id="'.$userRow3['taskid'].'"><i class="material-icons">mode_edit</i></td>';
+  }
 else{echo "<td>completed</td>";}
-
+  
 
       echo     "</tr>";
 }}
@@ -197,6 +202,35 @@ else{echo "<td>completed</td>";}
         
         $query->execute(array(':taskid'=>$id,':hname'=>$hname,':task'=>$task,':uname'=>$uname));
      }
+
+  public function getAlertsCount($hname)
+    {
+      $query = $this->db->prepare("SELECT COUNT(*) FROM data WHERE given_by = :hname AND alert = 1");
+      $query->execute(array(':hname'=>$hname));
+      $userRow = $query->fetchColumn();
+      $this->displayAlertCount($userRow);
+
+    }
+
+    private function displayAlertCount($alertCount)
+    {
+
+      if($alertCount>0)
+      {
+        
+        echo '<script type="text/javascript">$("#alertCount").html("'.$alertCount.'New");</script>';
+        
+      }
+    }
+
+    public function updateTask($taskid,$task)
+    {
+      $query = $this->db->prepare("UPDATE data SET textdata = :task WHERE taskid = :taskid");
+      $query->execute(array(":task" => $task, ":taskid" => $taskid));
+
+    }
+
+
 }
   
 

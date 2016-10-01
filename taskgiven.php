@@ -9,7 +9,8 @@ if($_SESSION['user_rank']!=1) {
   $user->redirect();
 }
 $query2 = $user->getMyTask($_SESSION['user_name']);
-  
+$alertCount = $user->getAlertsCount($_SESSION['user_name']);
+
 ?>
 
 

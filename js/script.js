@@ -6,6 +6,8 @@ $(document).ready(function() {
 
      $('.carousel').carousel();
 
+     $(".button-collapse").sideNav();
+
     $('#addTask').click(function(){
 
     	$('#page').load('addTask.php'); 	
@@ -40,6 +42,8 @@ $(document).ready(function() {
  $( "#taskForm").submit(function( event ) {
  	  if($("#subHeads").val()==NULL)
  	 event.preventDefault();
+
+
  
  	  // else
  	  // {
@@ -56,4 +60,37 @@ $(document).ready(function() {
     //  	});
  	  
  		});
+
+   $('.editTask').click(function(){
+
+      var id = this.id;
+      var task= $(".task"+id).html();
+      $('.modal-taskid').val(id);
+      $('.modal-task').val(task); 
+      $('#modal1').openModal();
+
+
+  });
+
+   $(".btn-taskUpdt").click(function(){
+
+      var id = $(".modal-taskid").val();
+      var task = $(".modal-task").val();
+      $.ajax ({
+
+        url:'taskUpdate.php',
+        type: 'POST',
+        data: { taskid : id, task : task, taskUpdt : 1 },
+        success: function(data){
+          $('#modal1').closeModal();
+          $(".task"+id).html(task);
+        }
+
+
+      });
+
+
+   });
+
+
   });

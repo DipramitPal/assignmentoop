@@ -2,3 +2,12 @@
 	margin: 100px;
 }
 .card-panel{height: 400px !important;width: 400px !important;}
+
+#alertCount {
+	background-color: green;
+	font-size: 10px;
+	height: 20px;
+	border-radius: 8px;
+	width: 55px;
+
+}

@@ -20,7 +20,9 @@ if($_SESSION['user_rank']!=1) {
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
+    
     <link rel="stylesheet" type="text/css" href="css/main.css">
+
             
       <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -36,7 +38,7 @@ if($_SESSION['user_rank']!=1) {
             <li id="alltask"><a href="#">All Tasks</a></li>
             <li id="addTask"><a href="#">Add Task</a></li>
              <li id="taskgiven"><a href="#">Task Given By Me</a></li>
-            <li><a href="#alerts">Alerts</a></li>
+            <li><a href="#alerts">Alerts <span id="alertCount"></span></a></li>
             <li><a href="logout.php">Logout</a></li>
           </ul>
         </div>
@@ -44,7 +46,7 @@ if($_SESSION['user_rank']!=1) {
     </div>
 
     <div id="page">
-      
+    <script type="text/javascript">$("#page").load('taskgiven.php');</script>
 
 
     </div>
