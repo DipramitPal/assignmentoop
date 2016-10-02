@@ -9,7 +9,7 @@ if($_SESSION['user_rank']!=1) {
   $user->redirect();
 }
 $query = $user->getSubs();
-
+$alertCount = $user->getAlertsCount($_SESSION['user_name']);
 	
 ?>
 

@@ -34,7 +34,14 @@ $(document).ready(function() {
 
    $('#alerts').click(function(){
 
-    	$('#page').load('alerts.php'); 	
+    	 $('#modal2').openModal();	
+       $.ajax({
+        url: 'alertClean.php',
+        type: 'POST',
+        data: {alertClean : 1}
+
+
+       });
     })
 
 
@@ -112,6 +119,8 @@ $(document).ready(function() {
 
 
    });
+
+
 
 
   });

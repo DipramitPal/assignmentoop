@@ -121,7 +121,7 @@ echo "<div class='carousel-item'>
         <div class='card-panel teal'> 
           <span class='white-text'> "
 .$userRow2["given_to"]."<br>".$userRow2["textdata"]."<br>";
-if($userRow2["completed"]==0){echo "Not Completed<form><input type='hidden' name='hid' value='".$userRow2["taskid"]."'>  <a class='waves-effect waves-light btn' type='submit' name='submit2'>Click to complete</a>";
+if($userRow2["completed"]==0){echo "Not Completed <form method='POST'><input type='hidden' name='hid' value='".$userRow2["taskid"]."'>  <input class='waves-effect waves-light btn' type='submit' name='submit2' value='Click To Complete'></form>";
 
 }
 else{echo "completed";}
@@ -132,15 +132,7 @@ else{echo "completed";}
       </div>
     </div> </div>";
 }
-if(isset($_POST['submit2'])){
-  $hid=$_POST['hid'];
-  
-$user->changecomp($hid);
 
-
-header("Refresh:0");
-
-}
 
 
 
@@ -237,6 +229,26 @@ else{echo "<td>completed</td>";}
 
     }
 
+    public function alertSection($hname)
+    {
+      $query = $this->db->prepare("SELECT taskid,given_to,textdata FROM data WHERE given_by = :hname AND alert = 1");
+      $query->execute(array(":hname"=>$hname));
+      while($userRow = $query->fetch(PDO::FETCH_ASSOC))
+      {
+        echo '<li class="collection-item avatar"><img src="css/info.png" class="circle"><span class="title">'.$userRow["given_to"].'</span>
+         <p>Task ID:'.$userRow["taskid"].' :'.$userRow['textdata'].' <br>
+         Completed
+      </p>';
+      }
+
+
+
+    }
+   public function clearAlert($hname)
+    {
+      $query = $this->db->prepare("UPDATE data SET alert = 0 WHERE given_by = :hname");
+      $query->execute(array(":hname"=>$hname));
+    }
 
 }
   

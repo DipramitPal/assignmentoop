@@ -7,7 +7,8 @@ if (!isset($_SESSION['user_name']))
   header('Location: index.php');
 
 $query3 = $user->getAllTask($_SESSION['user_name']);
-  
+if($_SESSION['user_rank']==1)
+  $alertCount = $user->getAlertsCount($_SESSION['user_name']);
 ?>
 
   <div class="container" ><br>

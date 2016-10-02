@@ -6,8 +6,18 @@ if (!isset($_SESSION['user_name']))
   header('Location: index.php');
 if($_SESSION['user_rank']!=1) {
   $user->redirect();
-}
 
+
+}
+if(isset($_POST['submit2'])){
+  $hid=$_POST['hid'];
+ echo "<script type='text/javascript'>alert('$hid');</script>";
+$user->changecomp($hid);
+
+
+
+
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,7 +48,7 @@ if($_SESSION['user_rank']!=1) {
             <li id="alltask"><a href="#">All Tasks</a></li>
             <li id="addTask"><a href="#">Add Task</a></li>
              <li id="taskgiven"><a href="#">Task Given By Me</a></li>
-            <li><a href="#alerts">Alerts <span id="alertCount"></span></a></li>
+            <li id="alerts"><a href="#">Alerts <span id="alertCount"></span></a></li>
             <li><a href="logout.php">Logout</a></li>
           </ul>
         </div>
@@ -50,6 +60,16 @@ if($_SESSION['user_rank']!=1) {
 
 
     </div>
+    <div id="modal2" class="modal bottom-sheet">
+    <div class="modal-content">
+     <ul class="collection alertSection"> 
+     <?php $user->alertSection($_SESSION['user_name']); ?>
+     
+     </ul>
+    </div>
+    
+  </div>
+          
 
   </body>
 </html>
