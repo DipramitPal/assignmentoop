@@ -9,15 +9,7 @@ if($_SESSION['user_rank']!=1) {
 
 
 }
-if(isset($_POST['submit2'])){
-  $hid=$_POST['hid'];
- echo "<script type='text/javascript'>alert('$hid');</script>";
-$user->changecomp($hid);
 
-
-
-
-}
 ?>
 <!DOCTYPE html>
 <html>

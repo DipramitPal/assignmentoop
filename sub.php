@@ -7,15 +7,7 @@ if (!isset($_SESSION['user_name']))
 if($_SESSION['user_rank']!=2) {
   $user->redirect();
 }
-if(isset($_POST['submit2'])){
-  $hid=$_POST['hid'];
- echo "<script type='text/javascript'>alert('$hid');</script>";
-$user->changecomp($hid);
 
-
-
-
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,8 +42,6 @@ $user->changecomp($hid);
     </div>
 
     <div id="page">
-      
-
 
     </div>
 

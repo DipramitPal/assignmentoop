@@ -7,5 +7,4 @@ $user->redirect();
 
 if(isset($_POST['alertClean'])&& $_SESSION['user_rank']==1)
 	$user->clearAlert($_SESSION['user_name']);
-
-?>
+header("Refresh:0");?>

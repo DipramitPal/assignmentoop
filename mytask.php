@@ -9,7 +9,7 @@ if($_SESSION['user_rank']!=2) {
   $user->redirect();
 }
 $query2 = $user->getMyTaskUser($_SESSION['user_name']);
-  
+
 ?>
 <style type="text/css">.card-panel{height: 400px !important;width: 400px !important;}</style>
 
@@ -27,8 +27,23 @@ $user->makePanel($query2);
 
 ?>
  
- <script type="text/javascript">$(document).ready(function(){
-      $('.carousel').carousel();
-    });</script>
+
        
   </div>
+   <script type="text/javascript">$(document).ready(function(){
+      $('.carousel').carousel();
+    });</script>
+     <script type="text/javascript">$(".submit22").click(function(){
+     	var taskid=$(this).prop("name");
+
+   $.ajax({
+  method: "POST",
+  url: "bypass.php",
+  data: { taskid:taskid }
+})
+  .done(function( data ) {
+    alert( data );
+  });
+  
+   location.reload();
+});</script>
