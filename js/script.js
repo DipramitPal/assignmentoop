@@ -120,7 +120,21 @@ $(document).ready(function() {
 
    });
 
+$(".submit22").click(function(){
+      var id=$(this).prop("name");
 
+   $.ajax({
+  method: "POST",
+  url: "bypass.php",
+  data: { id:id },
+   success: function(data) {
+    alert( data );
+  }
+});
+ 
+  
+   window.location.href = "head.php";
+});
 
 
   });

@@ -121,7 +121,7 @@ echo "<div class='carousel-item'>
         <div class='card-panel teal'> 
           <span class='white-text'> "
 .$userRow2["given_to"]."<br>".$userRow2["textdata"]."<br>";
-if($userRow2["completed"]==0){echo "Not Completed <form method='POST' ><input type='hidden' name='hid' value='".$userRow2["taskid"]."'>  <input class='waves-effect waves-light btn submit22' type='submit' name='".$userRow2["taskid"]."' value='Click To Complete'></form>";
+if($userRow2["completed"]==0){echo "Not Completed <form method='POST' ><input type='hidden' name='hid' value='".$userRow2["id"]."'>  <input class='waves-effect waves-light btn submit22' type='submit' name='".$userRow2["id"]."' value='Click To Complete'></form>";
 
 }
 else{echo "completed";}
@@ -139,12 +139,12 @@ else{echo "completed";}
 
 
 }
- public function changecomp($uname){
+ public function changecomp($id){
 
- $query3 = $this->db->prepare(" UPDATE `data` SET `completed` = '1',  `alert` = '1' WHERE `data`.`taskid` = :uname");
-   $query3->execute(array(':uname'=>$uname));
+ $query3 = $this->db->prepare(" UPDATE `data` SET `completed` = '1',  `alert` = '1' WHERE `id` = :id");
+   $query3->execute(array(':id'=>$id));
    $query3->execute();
-      return $query3;
+      
 
 
 }
