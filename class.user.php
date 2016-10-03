@@ -8,7 +8,7 @@ class USER
       $this->db = $DB_con;
     }
  
-   
+/*  LOGIN FUNCTIONS */   
  
     public function login($uname,$upass)
     {
@@ -63,6 +63,10 @@ class USER
         return true;
    }
 
+   /*  ##################################################   */
+
+   /* Adding New Task */
+
    private function getBusyStatus($uname)
     {
       $query = $this->db->prepare("SELECT * FROM data WHERE given_to=:uname ORDER BY taskid DESC LIMIT 1");
@@ -85,6 +89,37 @@ class USER
       $query->execute();
       return $query;
     }
+
+ public function getAvailablesubs($query){
+            while($userRow=$query->fetch(PDO::FETCH_ASSOC))
+                       {
+
+                          echo "<option value='".$userRow['name']."'";
+                          $this->getBusyStatus($userRow['name']);
+                          echo ">";
+                          echo $userRow['name'];
+                          echo "</option>";
+
+                        
+                       }
+                     }
+
+
+
+public function getMaxTaskid()
+    {
+       $query = $this->db->prepare("SELECT max(taskid) FROM data");
+        $query->execute();
+        $id = $query->fetchColumn();
+        return $id;
+     }
+
+ 
+ 
+
+ /* ######################################### */
+
+ /*  Display Functions */
     public function getMyTask($uname)
     {
      $query2 = $this->db->prepare("SELECT * FROM data WHERE given_by=:uname ORDER BY id DESC ");
@@ -98,19 +133,7 @@ class USER
       return $query2;
     }
 
-public function getAvailablesubs($query){
-while($userRow=$query->fetch(PDO::FETCH_ASSOC))
-                       {
 
-                          echo "<option value='".$userRow['name']."'";
-                          $this->getBusyStatus($userRow['name']);
-                          echo ">";
-                          echo $userRow['name'];
-                          echo "</option>";
-
-                        
-                       }
-                     }
 
 public function makePanel($query2){
     while($userRow2=$query2->fetch(PDO::FETCH_ASSOC))
@@ -133,23 +156,8 @@ else{echo "completed";}
     </div> </div>";
 }
 
-
-
-
-
-
 }
- public function changecomp($id){
-
- $query3 = $this->db->prepare(" UPDATE `data` SET `completed` = '1',  `alert` = '1' WHERE `id` = :id");
-   $query3->execute(array(':id'=>$id));
-   $query3->execute();
-      
-
-
-}
-
-  public function getAllTask($uname)
+ public function getAllTask($uname)
     {
      $query3 = $this->db->prepare("SELECT * FROM data  ORDER BY id DESC ");
       $query3->execute(array(':uname'=>$uname));
@@ -172,39 +180,10 @@ else{echo "<td>completed</td>";}
   
 
       echo     "</tr>";
-}}
+}
+}
 
-
-
-
- public function getMaxTaskid()
-    {
-       $query = $this->db->prepare("SELECT max(taskid) FROM data");
-        $query->execute();
-        $id = $query->fetchColumn();
-        return $id;
-     }
- 
-     public function addTask($task,$uname,$hname,$id)
-     {
-        
-        
-       
-        $query = $this->db->prepare("INSERT INTO data (taskid,given_by,given_to,textdata,alert,completed) values (:taskid,:hname,:uname,:task,0,0)");
-        
-        $query->execute(array(':taskid'=>$id,':hname'=>$hname,':task'=>$task,':uname'=>$uname));
-     }
-
-  public function getAlertsCount($hname)
-    {
-      $query = $this->db->prepare("SELECT COUNT(*) FROM data WHERE given_by = :hname AND alert = 1");
-      $query->execute(array(':hname'=>$hname));
-      $userRow = $query->fetchColumn();
-      $this->displayAlertCount($userRow);
-
-    }
-
-    private function displayAlertCount($alertCount)
+private function displayAlertCount($alertCount)
     {
 
       if($alertCount>0)
@@ -215,19 +194,6 @@ else{echo "<td>completed</td>";}
       }
     }
 
-    public function updateTask($taskid,$task)
-    {
-      $query = $this->db->prepare("UPDATE data SET textdata = :task WHERE taskid = :taskid");
-      $query->execute(array(":task" => $task, ":taskid" => $taskid));
-
-    }
-
-    public function delTask($taskid)
-    {
-      $query = $this->db->prepare("DELETE FROM data WHERE taskid = :taskid");
-      $query->execute(array(":taskid" => $taskid));
-
-    }
 
     public function alertSection($hname)
     {
@@ -244,11 +210,77 @@ else{echo "<td>completed</td>";}
 
 
     }
-   public function clearAlert($hname)
+/* ######################################## */
+
+/* Update or Insertion Functions */
+
+public function updateTask($taskid,$task)
+    {
+      $query = $this->db->prepare("UPDATE data SET textdata = :task WHERE taskid = :taskid");
+      $query->execute(array(":task" => $task, ":taskid" => $taskid));
+
+    }
+
+    public function delTask($taskid)
+    {
+      $query = $this->db->prepare("DELETE FROM data WHERE taskid = :taskid");
+      $query->execute(array(":taskid" => $taskid));
+
+    }
+
+    public function addTask($task,$uname,$hname,$id)
+     {
+        
+        
+       
+        $query = $this->db->prepare("INSERT INTO data (taskid,given_by,given_to,textdata,alert,completed) values (:taskid,:hname,:uname,:task,0,0)");
+        
+        $query->execute(array(':taskid'=>$id,':hname'=>$hname,':task'=>$task,':uname'=>$uname));
+     }
+
+
+     public function clearAlert($hname)
     {
       $query = $this->db->prepare("UPDATE data SET alert = 0 WHERE given_by = :hname");
       $query->execute(array(":hname"=>$hname));
     }
+
+
+    
+
+
+    /* ######################################### */
+
+    /* Support Functions */
+
+
+ public function changecomp($id){
+
+ $query3 = $this->db->prepare(" UPDATE `data` SET `completed` = '1',  `alert` = '1' WHERE `id` = :id");
+   $query3->execute(array(':id'=>$id));
+   $query3->execute();
+      
+
+
+}
+
+  
+
+  public function getAlertsCount($hname)
+    {
+      $query = $this->db->prepare("SELECT COUNT(*) FROM data WHERE given_by = :hname AND alert = 1");
+      $query->execute(array(':hname'=>$hname));
+      $userRow = $query->fetchColumn();
+      $this->displayAlertCount($userRow);
+
+    }
+
+    
+/* ############################# */
+    
+
+    
+   
 
 }
   
